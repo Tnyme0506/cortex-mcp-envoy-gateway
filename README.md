@@ -77,21 +77,3 @@ uvicorn api.main:app --reload --port 8080
 | `envoy/envoy.yaml` | Envoy listener + routes |
 | `docker-compose.yml` | API + Envoy stack |
 | `scripts/smoke_test.py` | End-to-end check via gateway |
-
-## Publish to GitHub
-
-```bash
-cd cortex-mcp-envoy-gateway
-git init
-git add .
-git commit -m "Add Cortex API + MCP + Envoy gateway demo"
-gh repo create cortex-mcp-envoy-gateway --public --source=. --remote=origin --push
-```
-
-Repo URL to put on the resume: `https://github.com/Tnyme0506/cortex-mcp-envoy-gateway`
-
-## Interview talking points
-
-1. **Cortex API** — agent/search contract, mock vs real backend swap via env.
-2. **MCP** — tools as the LLM-facing interface over HTTP APIs.
-3. **Envoy** — single ingress, path routing, timeouts, admin stats.
