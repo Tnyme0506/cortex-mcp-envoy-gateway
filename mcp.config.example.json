@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "cortex-mcp-envoy-gateway": {
+      "command": "python",
+      "args": ["-m", "mcp_server.server"],
+      "env": {
+        "CORTEX_API_BASE": "http://127.0.0.1:8088",
+        "PYTHONPATH": "."
+      }
+    }
+  }
+}

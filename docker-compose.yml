@@ -1,0 +1,24 @@
+services:
+  api:
+    build: .
+    ports:
+      - "8080:8080"
+    environment:
+      CORTEX_MODE: mock
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  envoy:
+    image: envoyproxy/envoy:v1.31-latest
+    depends_on:
+      api:
+        condition: service_healthy
+    ports:
+      - "8088:8088"
+      - "9901:9901"
+    volumes:
+      - ./envoy/envoy.yaml:/etc/envoy/envoy.yaml:ro
+    command: ["-c", "/etc/envoy/envoy.yaml", "--log-level", "info"]
